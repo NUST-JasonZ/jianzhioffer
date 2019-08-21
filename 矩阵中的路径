@@ -1,0 +1,26 @@
+思想：使用回溯法，约束条件为path为空，或者超过边界，不满足条件；当前位置首先利用visited矩阵记录为False，说明已经被访问过；递归下去，如果最终path为空，
+  则返回为True。如果不为False，则需要把visited矩阵记录状态返回原来的状态。
+
+代码：
+class Solution:
+    def hasPath(self, matrix, rows, cols, path):
+        visited = [True]*rows*cols  # 查看位置是否被访问过
+        for i in range(rows):
+            for j in range(cols):
+                if(self.findPath(matrix,rows,cols, i, j, path, visited)):
+                    return True
+        return False
+
+    def findPath(self, matrix, rows, cols, i, j, path, visited):
+        if not path:
+            return True
+        if i<0 or i>=rows or j<0 or j>=cols or matrix[i*cols+j]!=path[0] or visited[i*cols+j]==False:
+            return False
+        visited[i*cols+j] = False
+        if(self.findPath(matrix,rows,cols,i+1,j,path[1:],visited) or
+               self.findPath(matrix,rows,cols,i-1,j,path[1:],visited) or
+               self.findPath(matrix,rows,cols,i,j-1,path[1:],visited) or
+               self.findPath(matrix,rows,cols,i,j+1,path[1:],visited)):
+            return True
+        visited[i*cols+j] = True
+        return False
