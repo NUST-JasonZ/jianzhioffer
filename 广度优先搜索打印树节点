@@ -1,0 +1,18 @@
+思路：广度优先搜索使用队列结构，先进先出
+代码：
+class Solution:
+    # 返回从上到下每个节点值列表，例：[1,2,3]
+    def PrintFromTopToBottom(self, root):
+        # write code here
+        result = []
+        if not root:
+            return []
+        queue = [root]
+        while queue:
+            temp = queue.pop(0)
+            result.append(temp.val)
+            if temp.left:
+                queue.append(temp.left)
+            if temp.right:
+                queue.append(temp.right)
+        return result
