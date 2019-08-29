@@ -1,0 +1,9 @@
+思想：递归的方法遍历左右子树，取最大
+  
+代码：
+class Solution:
+    def TreeDepth(self, pRoot):
+        # write code here
+        if not pRoot:
+            return 0
+        return max(self.TreeDepth(pRoot.left) + 1, self.TreeDepth(pRoot.right) + 1)
