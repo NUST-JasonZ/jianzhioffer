@@ -1,0 +1,19 @@
+题目：输入一棵二叉树，判断该二叉树是否是平衡二叉树。平衡二叉树，左右子树深度差不超过1
+思想：递归的方式，构造函数获取左右子树的深度，再不断遍历左右子树
+代码：
+class Solution:
+    def IsBalanced_Solution(self, pRoot):
+        # write code here
+        if not pRoot:
+            return True
+        if abs(self.Depth(pRoot.left)-self.Depth(pRoot.right)) > 1:  # 左右子树深度差超过1，为非平衡二叉树
+            return False
+        return self.IsBalanced_Solution(pRoot.left) and self.IsBalanced_Solution(pRoot.right)  # 递归遍历所有节点
+    
+    # 节点的最大深度
+    def Depth(self,p):
+        if not p:
+            return 0
+        nleft = self.Depth(p.left)
+        nright = self.Depth(p.right)
+        return max(nleft+1, nright+1)
